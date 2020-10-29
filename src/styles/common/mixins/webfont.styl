@@ -1,0 +1,14 @@
+/*
+ * Сonnect new webfont
+ */
+webfont(family, folder, file, weight, style)
+  @font-face
+    font-weight weight
+    font-style style
+    font-family family
+    src url("assets/fonts/" + folder + "/" + file + ".eot")
+    src:
+      url("assets/fonts/" + folder + "/" + file + ".eot?#iefix") format("embedded-opentype"),
+      url("assets/fonts/" + folder + "/" + file + ".woff2") format("woff2"),
+      url("assets/fonts/" + folder + "/" + file + ".woff") format("woff"),
+      url("assets/fonts/" + folder + "/" + file + ".ttf") format("truetype")
