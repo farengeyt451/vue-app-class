@@ -17,7 +17,7 @@
 import AppHeader from '@/modules/features/header/pages/AppHeader.vue';
 
 export default {
-  /** Components*/
+  /** Template dependencies*/
   components: {
     AppHeader
   },

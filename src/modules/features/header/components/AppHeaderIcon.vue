@@ -15,22 +15,17 @@
 import IconBase from '@/modules/base/IconBase.vue';
 
 export default {
-  /** Components*/
+  /** Template dependencies*/
   components: {
     IconBase
   },
 
-  /** Props */
+  /** Interface */
   props: {
     viewBox: {
       type: String,
       default: '0 0 16 16'
     }
-  },
-
-  /** Local state */
-  data() {
-    return {};
   },
 
   /** Non-reactive properties */

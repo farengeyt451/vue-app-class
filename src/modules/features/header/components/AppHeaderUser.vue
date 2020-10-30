@@ -18,22 +18,11 @@ import AppHeaderIcon from '../components/AppHeaderIcon.vue';
 import IconUser from '@/icons/IconUser.vue';
 
 export default {
-  /** Components*/
+  /** Template dependencies*/
   components: {
     AppHeaderIcon,
     IconUser
   },
-
-  /** Props */
-  props: {},
-
-  /** Local state */
-  data() {
-    return {};
-  },
-
-  /** Lifecycle events */
-  // created: function() {}
 
   /** Non-reactive properties */
   methods: {}

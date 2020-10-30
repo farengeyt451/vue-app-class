@@ -25,7 +25,7 @@
         class="header__preloader"
         v-else
       >
-        <ContentLoader
+        <content-loader
           primaryColor="#f3f3f3"
           secondaryColor="#ecebeb"
         >
@@ -39,7 +39,7 @@
             width="62"
             height="12"
           />
-        </ContentLoader>
+        </content-loader>
       </div>
 
     </div>
@@ -54,20 +54,19 @@
             <icon-random></icon-random>
           </app-header-icon>
         </div>
+
+        <div class="header__icon header__icon--search">
+          <app-header-icon @icon-click="onIconClick">
+            <icon-search></icon-search>
+          </app-header-icon>
+        </div>
       </div>
 
-      <div class="header__icon header__icon--search">
-        <app-header-icon @icon-click="onIconClick">
-          <icon-search></icon-search>
-        </app-header-icon>
-      </div>
-
-      <!-- User -->
+      <!-- User menu -->
       <div class="header__user">
         <app-header-user></app-header-user>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -81,7 +80,7 @@ import IconRandom from '@/icons/IconRandom.vue';
 import IconSearch from '@/icons/IconSearch.vue';
 
 export default {
-  /** Components */
+  /** Template dependencies */
   components: {
     AppHeaderNav,
     AppHeaderIcon,
@@ -102,9 +101,10 @@ export default {
 
   /** Lifecycle events */
   created() {
+    /** Delay to see placeholder */
     setTimeout(() => {
       this.fetchHeaderData();
-    }, 4000);
+    }, 2000);
   },
 
   /** Non-reactive properties */
@@ -121,6 +121,7 @@ export default {
     },
 
     handleSuccessResponse(data) {
+      console.log('log: handleSuccessResponse -> data', data);
       this.contentItems = data;
     },
 
