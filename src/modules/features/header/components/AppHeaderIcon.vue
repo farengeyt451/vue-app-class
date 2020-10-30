@@ -1,13 +1,33 @@
 <template>
+
   <div
     class="icon"
     @click="onIconClick"
   >
-    <div class="icon__wrapper">
-      <icon-base :viewBox="viewBox">
-        <slot></slot>
-      </icon-base>
-    </div>
+    <!-- Render wrapper with tooltip -->
+    <template v-if="shouldShowTooltip">
+      <div
+        class="icon__wrapper"
+        v-tippy="tippyProps"
+      >
+        <div class="icon__source">
+          <icon-base :viewBox="viewBox">
+            <slot></slot>
+          </icon-base>
+        </div>
+      </div>
+    </template>
+
+    <!-- Render wrapper without tooltip -->
+    <template v-else>
+      <div class="icon__wrapper">
+        <div class="icon__source">
+          <icon-base :viewBox="viewBox">
+            <slot></slot>
+          </icon-base>
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -17,28 +37,49 @@ import IconBase from '@/modules/base/IconBase.vue';
 export default {
   /** Template dependencies*/
   components: {
-    IconBase
+    IconBase,
   },
 
   /** Interface */
   props: {
     viewBox: {
       type: String,
-      default: '0 0 16 16'
-    }
+      default: '0 0 16 16',
+    },
+    shouldShowTooltip: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    tooltipContent: {
+      required: false,
+    },
+  },
+
+  /** Local state */
+  data() {
+    return {
+      tippyProps: {
+        animation: 'shift-away',
+        arrow: false,
+        content: this.tooltipContent,
+        duration: [400, 250],
+        theme: 'light header-icon',
+      },
+    };
   },
 
   /** Non-reactive properties */
   methods: {
     onIconClick(event) {
       this.$emit('icon-click', event);
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="stylus">
-.icon
+.icon__wrapper
   display flex
   justify-content center
   align-items center
@@ -59,11 +100,20 @@ export default {
   &:active
     background-color darken(c-accent, 5%)
 
-.icon__wrapper
+  .accent-theme &
+    background-color #fce8e1
+    color c-accent
+
+.icon__source
   width 16px
   height 16px
+  pointer-events none
 
-.accent-theme
-  background-color #fce8e1
-  color c-accent
+.tippy-box[data-theme~="header-icon"]
+  padding 2px 4px
+  border-radius 6px
+  color c-black-soft
+  letter-spacing 0.1px
+  font-size 12px
+  font-family ff-main
 </style>

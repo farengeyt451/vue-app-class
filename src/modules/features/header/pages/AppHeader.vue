@@ -50,13 +50,21 @@
       <!-- Action buttons (random post, search) -->
       <div class="header__actions">
         <div class="header__icon header__icon--random">
-          <app-header-icon @icon-click="onIconClick">
+          <app-header-icon
+            @icon-click="onIconClick"
+            :shouldShowTooltip="true"
+            tooltipContent="Случайный материал"
+          >
             <icon-random></icon-random>
           </app-header-icon>
         </div>
 
         <div class="header__icon header__icon--search">
-          <app-header-icon @icon-click="onIconClick">
+          <app-header-icon
+            @icon-click="onIconClick"
+            :shouldShowTooltip="true"
+            tooltipContent="Поиск"
+          >
             <icon-search></icon-search>
           </app-header-icon>
         </div>
@@ -87,7 +95,7 @@ export default {
     IconRandom,
     IconSearch,
     AppHeaderUser,
-    ContentLoader
+    ContentLoader,
   },
 
   /** Local state */
@@ -95,7 +103,7 @@ export default {
     return {
       isLoading: false,
       contentItems: null,
-      error: null
+      error: null,
     };
   },
 
@@ -135,8 +143,8 @@ export default {
 
     onIconClick(event) {
       console.log(event);
-    }
-  }
+    },
+  },
 };
 </script>
 
