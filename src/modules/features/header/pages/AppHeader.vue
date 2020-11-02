@@ -21,6 +21,7 @@
       >
         <app-header-nav :nav-items="contentItems"></app-header-nav>
       </nav>
+
       <div
         class="header__preloader"
         v-else
@@ -30,13 +31,13 @@
           secondaryColor="#ecebeb"
         >
           <rect
-            v-for="(n, index) in 6"
+            v-for="(n, index) in 7"
             :key="index"
-            :x="index * 67"
+            :x="index * 55"
             y="12"
             rx="4"
             ry="4"
-            width="62"
+            width="50"
             height="12"
           />
         </content-loader>
@@ -47,25 +48,41 @@
     <!-- Right column -->
     <div class="header__column header__column--right">
 
+      <!-- Search box -->
+      <transition
+        name="expand"
+        mode="out-in"
+        key="small"
+      >
+        >
+        <div
+          class="header__search"
+          v-show="isSearchBoxVisible"
+        >
+          <app-header-search-box></app-header-search-box>
+        </div>
+      </transition>
+
       <!-- Action buttons (random post, search) -->
       <div class="header__actions">
-        <div class="header__icon header__icon--random">
-          <app-header-icon
-            @icon-click="onIconClick"
-            :shouldShowTooltip="true"
-            tooltipContent="Случайный материал"
-          >
-            <icon-random></icon-random>
-          </app-header-icon>
-        </div>
 
         <div class="header__icon header__icon--search">
           <app-header-icon
-            @icon-click="onIconClick"
-            :shouldShowTooltip="true"
             tooltipContent="Поиск"
+            :shouldShowTooltip="true"
+            @icon-click="toggleSearchBox"
           >
             <icon-search></icon-search>
+          </app-header-icon>
+        </div>
+
+        <div class="header__icon header__icon--random">
+          <app-header-icon
+            tooltipContent="Случайный материал"
+            :shouldShowTooltip="true"
+            @icon-click="onActionIconClick"
+          >
+            <icon-random></icon-random>
           </app-header-icon>
         </div>
       </div>
@@ -84,24 +101,27 @@ import { getHeaderData } from '@/api/rest/grid.ts';
 import AppHeaderNav from '../components/AppHeaderNav.vue';
 import AppHeaderIcon from '../components/AppHeaderIcon.vue';
 import AppHeaderUser from '../components/AppHeaderUser.vue';
+import AppHeaderSearchBox from '../components/AppHeaderSearchBox.vue';
 import IconRandom from '@/icons/IconRandom.vue';
 import IconSearch from '@/icons/IconSearch.vue';
 
 export default {
   /** Template dependencies */
   components: {
-    AppHeaderNav,
     AppHeaderIcon,
-    IconRandom,
-    IconSearch,
+    AppHeaderNav,
+    AppHeaderSearchBox,
     AppHeaderUser,
     ContentLoader,
+    IconRandom,
+    IconSearch,
   },
 
   /** Local state */
   data() {
     return {
       isLoading: false,
+      isSearchBoxVisible: false,
       contentItems: null,
       error: null,
     };
@@ -112,7 +132,7 @@ export default {
     /** Delay to see placeholder */
     setTimeout(() => {
       this.fetchHeaderData();
-    }, 2000);
+    }, 1000);
   },
 
   /** Non-reactive properties */
@@ -141,7 +161,11 @@ export default {
       this.isLoading = flag;
     },
 
-    onIconClick(event) {
+    toggleSearchBox() {
+      this.isSearchBoxVisible = !this.isSearchBoxVisible;
+    },
+
+    onActionIconClick(event) {
       console.log(event);
     },
   },
@@ -193,9 +217,37 @@ export default {
 .header__actions
   display flex
 
-.header__icon--search
+.header__icon--random
   margin-left 10px
+
+.header__icon--search
+  position relative
+  z-index 1
 
 .header__user
   margin-left 40px
+
+/*
+ * Search box
+ */
+.header__search
+  position relative
+  left 40px
+  overflow hidden
+  width 350px
+  border-top-right-radius 40px
+  border-bottom-right-radius 40px
+
+.expand-enter-active
+.expand-leave-active
+  transition width 0.2s ease
+
+.expand-leave-to
+  width 0
+
+.expand-enter
+  width 0
+
+.expand-enter-to
+  width 350px
 </style>

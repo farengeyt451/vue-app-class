@@ -1,69 +1,79 @@
 <template>
   <div class="nav">
 
-    <ul class="nav__list">
-      <li
-        class="nav__item"
-        v-for="item of navItems"
-        :key="item.id"
+    <div class="nav__list">
+      <transition-group
+        appear
+        appear-class="opacity-appear"
+        appear-to-class="opacity-appear-to"
+        appear-active-class="opacity-appear-active"
+        tag="ul"
+        class="nav__group"
       >
-        <router-link
-          class="nav__link"
-          :to="item.url"
-          :exact="true"
-          active-class="nav__link--active"
-          exact-active-class="nav__link-- exact-active"
-          :style="{ color: item.color && specialLinkColor(item.color) }"
-          :class="{ 'nav__link--special': item.color }"
+        <li
+          class="nav__item"
+          v-for="item of navItems"
+          :key="item.title"
         >
-          {{ item.title }}
-        </router-link>
+          <router-link
+            class="nav__link"
+            :to="item.url"
+            :exact="true"
+            active-class="nav__link--active"
+            exact-active-class="nav__link-- exact-active"
+            :style="{ color: item.color && specialLinkColor(item.color) }"
+            :class="{ 'nav__link--special': item.color, 'nav__link--overflow': item.title.length > 25 }"
+          >
+            {{ item.title }}
+          </router-link>
 
-        <div
-          class="nav__inner"
-          v-if="item.items || item.children"
-        >
+          <div
+            class="nav__inner"
+            v-if="item.items || item.children"
+          >
 
-          <div class="nav__wrapper">
+            <div class="nav__wrapper">
 
-            <!-- Themes submenu -->
-            <template v-if="item.items">
-              <div class="nav__themes">
-                <div
-                  class="nav__theme"
-                  v-for="theme of item.items"
-                  :key="theme.url"
-                >
-                  <app-header-theme :theme="theme"></app-header-theme>
+              <!-- Themes submenu -->
+              <template v-if="item.items">
+                <div class="nav__themes">
+                  <div
+                    class="nav__theme"
+                    v-for="theme of item.items"
+                    :key="theme.url"
+                  >
+                    <app-header-theme :theme="theme"></app-header-theme>
+                  </div>
                 </div>
-              </div>
 
-              <div class="nav__see-all">
-                <router-link
-                  :to="item.url"
-                  class="nav__see-link"
-                >
-                  <span>Смотреть все темы</span>
-                </router-link>
-              </div>
-            </template>
-
-            <!-- Materials submenu -->
-            <template v-if="item.children">
-              <div class="nav__materials">
-                <div
-                  class="nav__material"
-                  v-for="material of item.children"
-                  :key="material.title"
-                >
-                  <app-header-material :materialBlock="material"></app-header-material>
+                <div class="nav__see-all">
+                  <router-link
+                    :to="item.url"
+                    class="nav__see-link"
+                  >
+                    <span>Смотреть все темы</span>
+                  </router-link>
                 </div>
-              </div>
-            </template>
+              </template>
+
+              <!-- Materials submenu -->
+              <template v-if="item.children">
+                <div class="nav__materials">
+                  <div
+                    class="nav__material"
+                    v-for="material of item.children"
+                    :key="material.title"
+                  >
+                    <app-header-material :materialBlock="material"></app-header-material>
+                  </div>
+                </div>
+              </template>
+            </div>
           </div>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </transition-group>
+
+    </div>
   </div>
 </template>
 
@@ -79,8 +89,8 @@ export default {
   props: {
     navItems: {
       type: Array,
-      required: false
-    }
+      required: false,
+    },
   },
 
   /** Local state */
@@ -88,12 +98,14 @@ export default {
     /** Take first color */
     specialLinkColor() {
       return colors => colors && Array.from(colors.split(';'))[0];
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="stylus">
+@import "opacity-appear"
+
 border-height = 2px
 
 .nav
@@ -101,6 +113,11 @@ border-height = 2px
   font-family ff-main
 
 .nav__list
+  margin 0
+  padding 0
+  height 100%
+
+.nav__group
   display flex
   margin 0
   padding 0
@@ -113,12 +130,15 @@ border-height = 2px
   list-style-type none
 
 .nav__link
+  position relative
+  z-index 1
   display flex
   align-items center
   box-sizing content-box
   padding 0 15px
   height "calc(100% - %s)" % border-height
   border-bottom border-height solid transparent
+  background-color c-white
   color c-black-soft
   text-decoration none
   font-weight fw-regular
@@ -131,20 +151,39 @@ border-height = 2px
   border-bottom-color c-accent
 
 .nav__link--special
+  position relative
+  overflow hidden
+  max-width 230px
+  white-space nowrap
   font-weight fw-semi-bold
+
+.nav__link--overflow
+  &:after
+    position absolute
+    right 0
+    width 40px
+    height 100%
+    background-image linear-gradient(to right, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 1))
+    content ""
 
 .nav__item:hover
   & > .nav__inner
-    display block
+    visibility visible
+    opacity 1
+    transform translateY(0)
 
 .nav__inner
   position fixed
-  top 75px
+  top header-height
   left 0
-  display none
+  z-index 0
+  visibility hidden
   width 100%
   border-top 1px solid #e5e5e5
   background-color c-white
+  opacity 0
+  transition transform 0.4s cubic-bezier(0.55, 0.31, 0.15, 0.93), opacity 0.4s ease 0.2s
+  transform translateY((-(header-height)))
 
 .nav__wrapper
   margin 0 auto

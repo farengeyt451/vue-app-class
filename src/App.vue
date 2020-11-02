@@ -19,7 +19,7 @@ import AppHeader from '@/modules/features/header/pages/AppHeader.vue';
 export default {
   /** Template dependencies*/
   components: {
-    AppHeader
+    AppHeader,
   },
 
   /** Events */
@@ -29,13 +29,12 @@ export default {
       console.log('$route -> from', from);
       console.log('$route -> to', to);
       console.groupEnd();
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="stylus">
-@import "~normalize.css/normalize.css"
 @import "./styles"
 
 #app

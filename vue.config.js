@@ -15,10 +15,17 @@ module.exports = {
       '/api/v4': {
         target: 'https://flow.postnauka.ru/',
         changeOrigin: true,
-        pathRewrite: { '^/api/v4': '/v4' }
-      }
-    }
-  }
+        pathRewrite: { '^/api/v4': '/v4' },
+      },
+    },
+  },
+  css: {
+    loaderOptions: {
+      stylus: {
+        include: [path.join(__dirname, './src/styles/**/')],
+      },
+    },
+  },
 };
 
 function addStyleResource(rule) {
@@ -26,6 +33,6 @@ function addStyleResource(rule) {
     .use('style-resource')
     .loader('style-resources-loader')
     .options({
-      patterns: [path.resolve(__dirname, './src/styles/common/index.styl')]
+      patterns: [path.resolve(__dirname, './src/styles/common/index.styl')],
     });
 }

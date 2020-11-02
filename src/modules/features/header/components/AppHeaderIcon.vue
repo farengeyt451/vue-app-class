@@ -1,34 +1,42 @@
 <template>
 
-  <div
-    class="icon"
-    @click="onIconClick"
+  <transition
+    appear
+    appear-class="opacity-appear"
+    appear-to-class="opacity-appear-to"
+    appear-active-class="opacity-appear-active"
   >
-    <!-- Render wrapper with tooltip -->
-    <template v-if="shouldShowTooltip">
-      <div
-        class="icon__wrapper"
-        v-tippy="tippyProps"
-      >
-        <div class="icon__source">
-          <icon-base :viewBox="viewBox">
-            <slot></slot>
-          </icon-base>
-        </div>
-      </div>
-    </template>
 
-    <!-- Render wrapper without tooltip -->
-    <template v-else>
-      <div class="icon__wrapper">
-        <div class="icon__source">
-          <icon-base :viewBox="viewBox">
-            <slot></slot>
-          </icon-base>
+    <div
+      class="icon"
+      @click="onIconClick"
+    >
+      <!-- Render wrapper with tooltip -->
+      <template v-if="shouldShowTooltip">
+        <div
+          class="icon__wrapper"
+          v-tippy="tippyProps"
+        >
+          <div class="icon__source">
+            <icon-base :viewBox="viewBox">
+              <slot></slot>
+            </icon-base>
+          </div>
         </div>
-      </div>
-    </template>
-  </div>
+      </template>
+
+      <!-- Render wrapper without tooltip -->
+      <template v-else>
+        <div class="icon__wrapper">
+          <div class="icon__source">
+            <icon-base :viewBox="viewBox">
+              <slot></slot>
+            </icon-base>
+          </div>
+        </div>
+      </template>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -79,6 +87,8 @@ export default {
 </script>
 
 <style lang="stylus">
+@import "opacity-appear"
+
 .icon__wrapper
   display flex
   justify-content center
