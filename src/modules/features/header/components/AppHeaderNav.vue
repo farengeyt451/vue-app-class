@@ -17,10 +17,10 @@
         >
           <router-link
             class="nav__link"
-            :to="item.url"
-            :exact="true"
             active-class="nav__link--active"
             exact-active-class="nav__link-- exact-active"
+            :to="item.url"
+            :exact="true"
             :style="{ color: item.color && specialLinkColor(item.color) }"
             :class="{ 'nav__link--special': item.color, 'nav__link--overflow': item.title.length > 25 }"
           >

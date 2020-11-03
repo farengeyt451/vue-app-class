@@ -71,10 +71,17 @@ export default {
         animation: 'shift-away',
         arrow: false,
         content: this.tooltipContent,
-        duration: [400, 250],
+        duration: [400, 100],
         theme: 'light header-icon',
       },
     };
+  },
+
+  /** Events */
+  watch: {
+    tooltipContent(tooltipContent) {
+      this.tippyProps.content = tooltipContent;
+    },
   },
 
   /** Non-reactive properties */

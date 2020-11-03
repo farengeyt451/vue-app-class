@@ -1,9 +1,10 @@
 <template>
-  <form class="search">
+  <form class="search-box">
     <input
-      class="seacrh__input"
+      class="search-box__input"
       type="text"
       name="header-search"
+      placeholder="Найти что-то интересное"
     >
   </form>
 </template>
@@ -27,7 +28,7 @@ export default {
 </script>
 
 <style lang="stylus">
-.seacrh__input
+.search-box__input
   padding 10px 60px 10px 20px
   width 100%
   outline none
@@ -41,5 +42,7 @@ export default {
   transition border-color 0.2s ease-in, background-color 0.25s ease
 
   &:focus
-    background-color darken(#f5f8f9, 5%)
+    background-color darken(#f5f8f9, 7%)
+
+  placeholder-color(c-grey-light)
 </style>

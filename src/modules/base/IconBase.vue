@@ -1,35 +1,24 @@
 <template>
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    :viewBox="viewBox"
-    :aria-labelledby="iconName"
-    role="presentation"
-  >
-    <title
-      :id="iconName"
-      lang="en"
-    >{{iconName}} icon</title>
-    <g :fill="iconColor">
-      <slot />
-    </g>
-  </svg>
+  <div>
+    <slot></slot>
+  </div>
 </template>
 
 <script>
 export default {
   props: {
     iconName: {
-      type: String
+      type: String,
     },
     viewBox: {
       type: String,
-      default: '0 0 16 16'
+      default: '0 0 16 16',
     },
     iconColor: {
       type: String,
-      default: 'currentColor'
-    }
-  }
+      default: 'currentColor',
+    },
+  },
 };
 </script>
 
