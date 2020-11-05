@@ -76,12 +76,12 @@
 
 <script>
 import { ContentLoader } from 'vue-content-loader';
-import { getHeaderData } from '@/api/rest/grid.ts';
+import { getHeaderData } from '@/api/index.ts';
+import IconRandom from '@/icons/IconRandom.vue';
 import AppHeaderNav from '../components/AppHeaderNav.vue';
 import AppHeaderIcon from '../components/AppHeaderIcon.vue';
 import AppHeaderUser from '../components/AppHeaderUser.vue';
 import AppHeaderSearch from '../components/AppHeaderSearch.vue';
-import IconRandom from '@/icons/IconRandom.vue';
 
 export default {
   /** Template dependencies */
@@ -107,13 +107,13 @@ export default {
   created() {
     /** Delay to see placeholder */
     setTimeout(() => {
-      this.fetchHeaderData();
+      this.getData();
     }, 1000);
   },
 
   /** Non-reactive properties */
   methods: {
-    fetchHeaderData() {
+    getData() {
       this.swithLoadingFlagTo(true);
 
       getHeaderData()

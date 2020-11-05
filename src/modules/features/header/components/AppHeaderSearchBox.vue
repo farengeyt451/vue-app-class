@@ -1,30 +1,88 @@
 <template>
-  <form class="search-box">
+  <form
+    class="search-box"
+    @submit.prevent.stop
+  >
     <input
       class="search-box__input"
       type="text"
       name="header-search"
       placeholder="Найти что-то интересное"
+      v-model="searchQuery"
     >
   </form>
 </template>
 
-<script>
-export default {
-  /** Template dependencies*/
-  components: {},
+<script lang="ts">
+import { Vue, Component, Watch, Emit } from 'vue-property-decorator';
+import { getSearchResult } from '@/api/rest/search';
+import { debounce } from 'lodash-es';
+import Axios, { AxiosError, AxiosResponse, CancelToken, CancelTokenSource } from 'axios';
 
-  /** Interface */
-  props: {},
+const DEBOUNCE_WAIT_TIME = 180;
 
-  /** Local state */
-  data() {
-    return {};
-  },
+@Component({})
+export default class AppHeaderSearchBox extends Vue {
+  searchQuery = null;
+  isPending = false;
+  cancelSource!: CancelTokenSource;
+  currentPage = 1;
 
-  /** Non-reactive properties */
-  methods: {},
-};
+  debouncedGetData!: (query: string) => void;
+
+  private created() {
+    this.debouncedGetData = debounce(this.getData, DEBOUNCE_WAIT_TIME);
+  }
+
+  @Watch('searchQuery')
+  private onQueryChange(currentVal: string) {
+    this.cancelSearchQuery();
+    this.debouncedGetData(currentVal);
+  }
+
+  private getData(query: string) {
+    this.switchPendingFlagTo(true);
+
+    if (!query) {
+      this.emitSearchResult(null);
+      this.switchPendingFlagTo(false);
+      return;
+    }
+
+    this.generateCancelToken();
+    this.makeRequest(query, this.currentPage, this.cancelSource.token);
+  }
+
+  @Emit('pending-status')
+  private switchPendingFlagTo(flag: boolean) {
+    this.isPending = flag;
+  }
+
+  private generateCancelToken() {
+    this.cancelSource = Axios.CancelToken.source();
+  }
+
+  private makeRequest(query: string, page: number, cancelToken: CancelToken) {
+    getSearchResult(query, page, cancelToken)
+      .then(this.emitSearchResult)
+      .catch(this.processErrorResponse)
+      .finally(() => {
+        this.switchPendingFlagTo(false);
+      });
+  }
+
+  private emitSearchResult(results: AxiosResponse | null) {
+    this.$emit('search-results', results);
+  }
+
+  private processErrorResponse(error: AxiosError) {
+    console.error(error);
+  }
+
+  private cancelSearchQuery() {
+    this.cancelSource && this.cancelSource.cancel('This query is canceled');
+  }
+}
 </script>
 
 <style lang="stylus">

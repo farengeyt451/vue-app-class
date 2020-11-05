@@ -1,8 +1,10 @@
-export interface Logger {
+import { debounce } from 'lodash-es';
+
+interface Logger {
   log(message: string): void;
 }
 
-export class ConsoleLogger implements Logger {
+class ConsoleLogger implements Logger {
   public log(message: string): void {
     console.log(message);
   }
@@ -10,7 +12,7 @@ export class ConsoleLogger implements Logger {
 
 let logger: Logger;
 
-export class LoggerFactory {
+class LoggerFactory {
   public static getInstance(): Logger {
     if (!logger) {
       logger = new ConsoleLogger();
@@ -23,9 +25,10 @@ export class LoggerFactory {
  * Method decorator
  * It should only be applied to a class’s methods
  */
-export function simpleLog() {
+export function methodLogger() {
   logger = LoggerFactory.getInstance();
-  return function(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+
+  return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
     const targetMethod = descriptor.value;
 
     descriptor.value = function(...args: any[]) {

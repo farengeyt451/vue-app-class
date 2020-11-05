@@ -18,9 +18,7 @@
           v-tippy="tippyProps"
         >
           <div class="icon__source">
-            <icon-base :viewBox="viewBox">
-              <slot></slot>
-            </icon-base>
+            <slot></slot>
           </div>
         </div>
       </template>
@@ -29,9 +27,7 @@
       <template v-else>
         <div class="icon__wrapper">
           <div class="icon__source">
-            <icon-base :viewBox="viewBox">
-              <slot></slot>
-            </icon-base>
+            <slot></slot>
           </div>
         </div>
       </template>
@@ -40,20 +36,12 @@
 </template>
 
 <script>
-import IconBase from '@/modules/base/IconBase.vue';
-
 export default {
   /** Template dependencies*/
-  components: {
-    IconBase,
-  },
+  components: {},
 
   /** Interface */
   props: {
-    viewBox: {
-      type: String,
-      default: '0 0 16 16',
-    },
     shouldShowTooltip: {
       type: Boolean,
       required: false,
@@ -76,6 +64,8 @@ export default {
       },
     };
   },
+
+  computed: {},
 
   /** Events */
   watch: {
@@ -102,12 +92,13 @@ export default {
   align-items center
   width 40px
   height 40px
+  border 1px solid transparent
   border-radius 50%
   background-color c-light
   color c-grey-light
   transition-timing-function ease
   transition-duration 0.2s
-  transition-property color, background-color
+  transition-property color, background-color, border-color
 
   &:hover
     background-color c-accent
@@ -120,6 +111,11 @@ export default {
   .accent-theme &
     background-color #fce8e1
     color c-accent
+
+  .loading-theme &
+    border-color rgba(c-accent, 0.5)
+    color c-accent
+    pointer-events none
 
 .icon__source
   width 16px

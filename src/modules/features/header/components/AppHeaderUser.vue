@@ -3,10 +3,7 @@
     <div class="user__label">Личный кабинет</div>
 
     <div class="user__avatar">
-      <app-header-icon
-        viewBox="0 0 14 15"
-        class="accent-theme"
-      >
+      <app-header-icon class="accent-theme">
         <icon-user></icon-user>
       </app-header-icon>
     </div>
@@ -21,11 +18,11 @@ export default {
   /** Template dependencies*/
   components: {
     AppHeaderIcon,
-    IconUser
+    IconUser,
   },
 
   /** Non-reactive properties */
-  methods: {}
+  methods: {},
 };
 </script>
 

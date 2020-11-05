@@ -5,12 +5,14 @@ export default ({
   method = 'get',
   params = {},
   headers = {},
-  data = {}
+  data = {},
+  cancelToken = undefined,
 }: AxiosRequestConfig): Promise<any> =>
   axios({
     url: `/api/v4/${url}`,
     method,
     params,
     headers,
-    data
+    data,
+    cancelToken,
   });
