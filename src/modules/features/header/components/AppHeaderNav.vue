@@ -113,14 +113,10 @@ border-height = 2px
   font-family ff-main
 
 .nav__list
-  margin 0
-  padding 0
   height 100%
 
 .nav__group
   display flex
-  margin 0
-  padding 0
   height 100%
   list-style-type none
 

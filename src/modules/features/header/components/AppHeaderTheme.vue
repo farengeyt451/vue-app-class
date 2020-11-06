@@ -29,16 +29,16 @@ export default {
   props: {
     theme: {
       type: Object,
-      requred: true
-    }
+      requred: true,
+    },
   },
 
   /** Local state */
   computed: {
     getAppHost() {
       return process.env.VUE_APP_HOST;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -81,7 +81,6 @@ export default {
   margin-left 15px
 
 .theme__name
-  margin 0
   color c-black-soft
   font-weight fw-semi-bold
   font-size 18px

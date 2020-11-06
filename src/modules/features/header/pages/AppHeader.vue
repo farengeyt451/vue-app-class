@@ -67,9 +67,13 @@
       </div>
 
       <!-- User menu -->
-      <div class="header__user">
+      <router-link
+        tag="div"
+        to="/profile"
+        class="header__user"
+      >
         <app-header-user></app-header-user>
-      </div>
+      </router-link>
     </div>
   </div>
 </template>

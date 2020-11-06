@@ -14,7 +14,9 @@
         <app-header-search-box
           @pending-status="onPendingStatusChange"
           @search-results="onSearchResultsChange"
-        ></app-header-search-box>
+          :resetSearchQuery="results"
+        >
+        </app-header-search-box>
       </div>
     </transition>
 
@@ -44,9 +46,14 @@
 
     <div
       class="search__results"
+      :class="{ 'search__results--visible': isSearchBoxVisible }"
       v-if="results"
     >
-      <app-header-search-results :results="results"></app-header-search-results>
+      <app-header-search-results
+        :results="results"
+        @reset-results="onResultsReset"
+      >
+      </app-header-search-results>
     </div>
   </div>
 </template>
@@ -63,15 +70,13 @@ export default {
   /** Template dependencies*/
   components: { AppHeaderIcon, IconSearch, IconClose, IconLoading, AppHeaderSearchBox, AppHeaderSearchResults },
 
-  /** Interface */
-  props: {},
-
   /** Local state */
   data() {
     return {
       isSearchBoxVisible: false,
       isQueryPending: false,
       results: null,
+      resetSearchQuery: false,
     };
   },
 
@@ -86,7 +91,14 @@ export default {
     },
 
     onSearchResultsChange(results) {
-      console.log(results);
+      this.setResultsData(results);
+    },
+
+    onResultsReset() {
+      this.results = null;
+    },
+
+    setResultsData(results) {
       this.results = results;
     },
   },
@@ -124,11 +136,12 @@ export default {
   top 100%
   right 0
   display block
-  margin 0
   margin-top 30px
   max-width 350px
   width 100%
+  opacity 0
 
+  // Custom scroll bar
   .ps
     height 400px
 
@@ -143,6 +156,7 @@ export default {
         opacity 1
 
   .ps__rail-y
+    z-index 2
     width 10px
     opacity 0.8
 
@@ -154,6 +168,10 @@ export default {
   .ps__thumb-y
     width 4px
     background-color c-accent
+
+.search__results--visible
+  opacity 1
+  transition opacity 0.2s ease 0.2s
 
 /*
  * Open/close search input animation

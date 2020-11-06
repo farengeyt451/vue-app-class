@@ -31,9 +31,9 @@ export default {
   props: {
     materialBlock: {
       type: Object,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 
@@ -51,6 +51,8 @@ export default {
   list-style-type none
 
 .material__item
+  padding-top 20px
+
   &:not(:first-child)
     padding-top 15px
 

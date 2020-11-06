@@ -34,6 +34,11 @@ export default {
   font-family ff-main
   cursor pointer
 
+  &:hover
+    .user__avatar
+      border-color c-accent
+      background-color #fce8e1
+
 .user__label
   color c-black-soft
   text-transform uppercase
@@ -42,5 +47,9 @@ export default {
   line-height 1
 
 .user__avatar
+  box-sizing content-box
   margin-left 15px
+  border 1px solid transparent
+  border-radius 50%
+  transition border-color 0.2s ease
 </style>

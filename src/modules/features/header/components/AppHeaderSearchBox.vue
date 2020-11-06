@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Watch, Emit } from 'vue-property-decorator';
+import { Vue, Component, Watch, Emit, Prop } from 'vue-property-decorator';
 import { getSearchResult } from '@/api/rest/search';
 import { debounce } from 'lodash-es';
 import Axios, { AxiosError, AxiosResponse, CancelToken, CancelTokenSource } from 'axios';
@@ -23,6 +23,7 @@ const DEBOUNCE_WAIT_TIME = 180;
 
 @Component({})
 export default class AppHeaderSearchBox extends Vue {
+  @Prop() resetSearchQuery!: boolean;
   searchQuery = null;
   isPending = false;
   cancelSource!: CancelTokenSource;
@@ -38,6 +39,11 @@ export default class AppHeaderSearchBox extends Vue {
   private onQueryChange(currentVal: string) {
     this.cancelSearchQuery();
     this.debouncedGetData(currentVal);
+  }
+
+  @Watch('resetSearchQuery')
+  private onResetSearchQuery(curValue: boolean) {
+    if (!curValue) this.searchQuery = null;
   }
 
   private getData(query: string) {
