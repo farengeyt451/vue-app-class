@@ -6,17 +6,26 @@ import router from './router';
 import PerfectScrollbar from 'vue2-perfect-scrollbar';
 
 /** Directives */
-import '@/directives/tooltip.directive.ts';
+import '@/directives/tooltip.directive';
 
 /** Pipes */
-import '@/pipes/pluralize.pipe.ts';
+import '@/pipes/pluralize.pipe';
 
+/** Navigation guards */
+import { globalGuard } from './guards/router.global-guard';
+
+/** Plugins registration */
 Vue.use(PerfectScrollbar);
+
+/** Config */
 Vue.config.productionTip = false;
+
+/** Guards init */
+router.beforeEach(globalGuard);
 
 const app = new Vue({
   router,
-  render: h => h(App),
+  render: createElement => createElement(App),
 }).$mount('#app');
 
 console.log(app);

@@ -141,33 +141,11 @@ export default {
   width 100%
   opacity 0
 
-  // Custom scroll bar
+  @import "perfect-scrollbar"
+
   .ps
-    height 400px
-
-    &:hover
-      .ps__rail-x
-      .ps__rail-y
-        opacity 1
-
-    &:focus
-      .ps__rail-x
-      .ps__rail-y
-        opacity 1
-
-  .ps__rail-y
-    z-index 2
-    width 10px
-    opacity 0.8
-
-    &:hover
-      .ps__thumb-y
-        width 8px
-        background-color c-accent
-
-  .ps__thumb-y
-    width 4px
-    background-color c-accent
+    max-height 400px
+    height 100%
 
 .search__results--visible
   opacity 1

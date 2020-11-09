@@ -15,11 +15,11 @@
 
 <script lang="ts">
 import { Vue, Component, Watch, Emit, Prop } from 'vue-property-decorator';
-import { getSearchResult } from '@/api/rest/search';
-import { debounce } from 'lodash-es';
+import { getSearchResult } from '@/api';
+import debounce from 'lodash-es/debounce';
 import Axios, { AxiosError, AxiosResponse, CancelToken, CancelTokenSource } from 'axios';
 
-const DEBOUNCE_WAIT_TIME = 180;
+const DEBOUNCE_WAIT_TIME = 240;
 
 @Component({})
 export default class AppHeaderSearchBox extends Vue {

@@ -2,6 +2,7 @@
   <a
     class="button"
     :class="{ 'button--wide': isFullWidth }"
+    @click="onButtonClick"
   >
     <slot></slot>
   </a>
@@ -20,7 +21,12 @@ export default {
     },
   },
 
-  /** Lifecycle events */
+  /** Non-reactive properties */
+  methods: {
+    onButtonClick(event) {
+      this.$emit('button-click', event);
+    },
+  },
 };
 </script>
 

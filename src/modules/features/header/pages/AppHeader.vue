@@ -80,22 +80,22 @@
 
 <script>
 import { ContentLoader } from 'vue-content-loader';
-import { getHeaderData } from '@/api/index.ts';
+import { getHeaderData, isUserAuthenticated } from '@/api';
 import IconRandom from '@/icons/IconRandom.vue';
-import AppHeaderNav from '../components/AppHeaderNav.vue';
 import AppHeaderIcon from '../components/AppHeaderIcon.vue';
-import AppHeaderUser from '../components/AppHeaderUser.vue';
-import AppHeaderSearch from '../components/AppHeaderSearch.vue';
+const appHeaderUser = () => import('../components/AppHeaderUser.vue');
+const appHeaderNav = () => import('../components/AppHeaderNav.vue');
+const appHeaderSearch = () => import('../components/AppHeaderSearch.vue');
 
 export default {
   /** Template dependencies */
   components: {
     AppHeaderIcon,
-    AppHeaderNav,
-    AppHeaderUser,
+    appHeaderNav,
+    appHeaderUser,
     ContentLoader,
     IconRandom,
-    AppHeaderSearch,
+    appHeaderSearch,
   },
 
   /** Local state */
@@ -118,13 +118,13 @@ export default {
   /** Non-reactive properties */
   methods: {
     getData() {
-      this.swithLoadingFlagTo(true);
+      this.switchLoadingFlagTo(true);
 
       getHeaderData()
         .then(this.handleSuccessResponse)
         .catch(this.handleErrorResponse)
         .finally(() => {
-          this.swithLoadingFlagTo(false);
+          this.switchLoadingFlagTo(false);
         });
     },
 
@@ -137,12 +137,12 @@ export default {
       console.error(error);
     },
 
-    swithLoadingFlagTo(flag) {
+    switchLoadingFlagTo(flag) {
       this.isLoading = flag;
     },
 
     onActionIconClick(event) {
-      console.log(event);
+      this.$router.push('random-article');
     },
   },
 };

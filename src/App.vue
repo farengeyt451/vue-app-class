@@ -28,6 +28,7 @@ export default {
       console.group('Router');
       console.log('$route -> from', from);
       console.log('$route -> to', to);
+      console.log(history);
       console.groupEnd();
     },
   },

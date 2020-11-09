@@ -67,16 +67,17 @@
           </ul>
         </perfect-scrollbar>
 
-        <router-link
+        <div
           v-if="getSearchResultsCount() > 20"
           class="ah-results__more"
-          tag="div"
-          to="/search"
         >
-          <button-base :isFullWidth="true">
+          <button-base
+            :isFullWidth="true"
+            @button-click="onShowAllButtonClick"
+          >
             Показать все результаты
           </button-base>
-        </router-link>
+        </div>
       </div>
     </transition>
 
@@ -142,6 +143,10 @@ export default {
   methods: {
     onResultsReset() {
       this.$emit('reset-results');
+    },
+
+    onShowAllButtonClick() {
+      this.$router.push('/search');
     },
   },
 };
