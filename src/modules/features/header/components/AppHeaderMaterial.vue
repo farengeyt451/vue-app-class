@@ -1,21 +1,20 @@
 <template>
   <div
     v-if="materialBlock"
-    class="material"
+    class="ah-material"
   >
 
-    <h4 class="material__caption">{{ materialBlock.title }}</h4>
+    <h4 class="ah-material__caption">{{ materialBlock.title }}</h4>
 
-    <ul class="material__list">
+    <ul class="ah-material__list">
       <li
         v-for="link of materialBlock.links"
         :key="link.url"
-        class="material__item"
+        class="ah-material__item"
       >
         <router-link
-          class="material__link"
+          class="ah-material__link"
           :to="link.url"
-          :title="link.title"
         >
           {{ link.title }}
         </router-link>
@@ -38,19 +37,19 @@ export default {
 </script>
 
 <style lang="stylus">
-.material
+.ah-material
   font-family ff-main
 
-.material__caption
+.ah-material__caption
   font-weight fw-semi-bold
   font-size 24px
   line-height 1
 
-.material__list
+.ah-material__list
   padding 0
   list-style-type none
 
-.material__item
+.ah-material__item
   padding-top 20px
 
   &:not(:first-child)
@@ -60,7 +59,7 @@ export default {
     padding-bottom 20px
     border-bottom 1px solid #e5e5e5
 
-.material__link
+.ah-material__link
   display block
   color c-grey-light
   text-decoration none

@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 export default ({
   url = '/',
@@ -7,7 +7,7 @@ export default ({
   headers = {},
   data = {},
   cancelToken = undefined,
-}: AxiosRequestConfig): Promise<any> =>
+}: AxiosRequestConfig): Promise<AxiosResponse> =>
   axios({
     url: `/api/v4/${url}`,
     method,

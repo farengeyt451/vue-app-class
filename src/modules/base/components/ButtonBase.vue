@@ -1,7 +1,7 @@
 <template>
   <a
-    class="button"
-    :class="{ 'button--wide': isFullWidth }"
+    class="b-button"
+    :class="{ 'b-button--wide': isFullWidth }"
     @click="onButtonClick"
   >
     <slot></slot>
@@ -33,7 +33,7 @@ export default {
 <style lang="stylus">
 button-height = 42px
 
-.button
+.b-button
   display inline-block
   padding 0 20px
   height button-height
@@ -53,6 +53,6 @@ button-height = 42px
   &:active
     background-color lighten(c-accent, 5%)
 
-.button--wide
+.b-button--wide
   width 100%
 </style>

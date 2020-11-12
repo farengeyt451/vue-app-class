@@ -1,10 +1,12 @@
 import { AxiosResponse } from 'axios';
-import makeRequest from '../makeRequest';
+import makeRequest from '../helpers/makeRequest';
 import { AppHeader } from '@/interfaces/header/header.interface';
+import { BaseCard } from '@/interfaces/base-card/base-card.interface';
 
 const rootRoute = 'grid';
 
-export const getHeaderData = (): Promise<AppHeader.Item[]> =>
-  makeRequest({ url: `${rootRoute}/header`, method: 'get' }).then(
-    (response: AxiosResponse<AppHeader.Item[]>) => response.data
-  );
+export const getHeaderData = (): Promise<AxiosResponse<AppHeader.Item[]>> =>
+  makeRequest({ url: `${rootRoute}/header`, method: 'get' });
+
+export const getCards = (page = 1): Promise<AxiosResponse<BaseCard>> =>
+  makeRequest({ url: `${rootRoute}?page=${page}`, method: 'get' });

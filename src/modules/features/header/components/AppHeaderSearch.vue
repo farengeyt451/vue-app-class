@@ -1,5 +1,5 @@
 <template>
-  <div class="search">
+  <div class="ah-search">
 
     <!-- Search box -->
     <transition
@@ -8,7 +8,7 @@
       key="small"
     >
       <div
-        class="search__box"
+        class="ah-search__box"
         v-show="isSearchBoxVisible"
       >
         <app-header-search-box
@@ -21,7 +21,7 @@
     </transition>
 
     <!-- Action icon -->
-    <div class="search__icon">
+    <div class="ah-search__icon">
       <app-header-icon
         :tooltipContent="!isSearchBoxVisible ? 'Поиск' : 'Закрыть'"
         :shouldShowTooltip="true"
@@ -45,8 +45,8 @@
     </div>
 
     <div
-      class="search__results"
-      :class="{ 'search__results--visible': isSearchBoxVisible }"
+      class="ah-search__results"
+      :class="{ 'ah-search__results--visible': isSearchBoxVisible }"
       v-if="results"
     >
       <app-header-search-results
@@ -109,18 +109,18 @@ export default {
 /*
  * Search box
  */
-.search
+.ah-search
   position relative
   display flex
 
-.search__icon
+.ah-search__icon
   position relative
   z-index 1
 
-.search__icon--disabled
+.ah-search__icon--disabled
   pointer-events none
 
-.search__box
+.ah-search__box
   position relative
   left 40px
   overflow hidden
@@ -131,10 +131,11 @@ export default {
 /*
  * Search results
  */
-.search__results
+.ah-search__results
   position absolute
   top 100%
   right 0
+  z-index 2
   display block
   margin-top 30px
   max-width 350px
@@ -147,7 +148,7 @@ export default {
     max-height 400px
     height 100%
 
-.search__results--visible
+.ah-search__results--visible
   opacity 1
   transition opacity 0.2s ease 0.2s
 

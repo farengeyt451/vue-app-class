@@ -1,44 +1,44 @@
 <template>
-  <div class="nav">
+  <div class="ah-nav">
 
-    <div class="nav__list">
+    <div class="ah-nav__list">
       <transition-group
         appear
         appear-class="opacity-appear"
         appear-to-class="opacity-appear-to"
         appear-active-class="opacity-appear-active"
         tag="ul"
-        class="nav__group"
+        class="ah-nav__group"
       >
         <li
-          class="nav__item"
+          class="ah-nav__item"
           v-for="item of navItems"
           :key="item.title"
         >
           <router-link
-            class="nav__link"
-            active-class="nav__link--active"
-            exact-active-class="nav__link-- exact-active"
+            class="ah-nav__link"
+            active-class="ah-nav__link--active"
+            exact-active-class="ah-nav__link-- exact-active"
             :to="item.url"
             :exact="true"
             :style="{ color: item.color && specialLinkColor(item.color) }"
-            :class="{ 'nav__link--special': item.color, 'nav__link--overflow': item.title.length > 25 }"
+            :class="{ 'ah-nav__link--special': item.color, 'ah-nav__link--overflow': item.title.length > 25 }"
           >
             {{ item.title }}
           </router-link>
 
           <div
-            class="nav__inner"
+            class="ah-nav__inner"
             v-if="item.items || item.children"
           >
 
-            <div class="nav__wrapper">
+            <div class="ah-nav__wrapper">
 
               <!-- Themes submenu -->
               <template v-if="item.items">
-                <div class="nav__themes">
+                <div class="ah-nav__themes">
                   <div
-                    class="nav__theme"
+                    class="ah-nav__theme"
                     v-for="theme of item.items"
                     :key="theme.url"
                   >
@@ -46,10 +46,10 @@
                   </div>
                 </div>
 
-                <div class="nav__see-all">
+                <div class="ah-nav__see-all">
                   <router-link
                     :to="item.url"
-                    class="nav__see-link"
+                    class="ah-nav__see-link"
                   >
                     <span>Смотреть все темы</span>
                   </router-link>
@@ -58,9 +58,9 @@
 
               <!-- Materials submenu -->
               <template v-if="item.children">
-                <div class="nav__materials">
+                <div class="ah-nav__materials">
                   <div
-                    class="nav__material"
+                    class="ah-nav__material"
                     v-for="material of item.children"
                     :key="material.title"
                   >
@@ -97,7 +97,7 @@ export default {
   computed: {
     /** Take first color */
     specialLinkColor() {
-      return colors => colors && Array.from(colors.split(';'))[0];
+      return (colors) => colors && Array.from(colors.split(';'))[0];
     },
   },
 };
@@ -108,26 +108,26 @@ export default {
 
 border-height = 2px
 
-.nav
+.ah-nav
   height 100%
   font-family ff-main
 
-.nav__list
+.ah-nav__list
   height 100%
 
-.nav__group
+.ah-nav__group
   display flex
   height 100%
   list-style-type none
 
-.nav__item
+.ah-nav__item
   padding 0
   height 100%
   list-style-type none
 
-.nav__link
+.ah-nav__link
   position relative
-  z-index 1
+  z-index 2
   display flex
   align-items center
   box-sizing content-box
@@ -143,17 +143,17 @@ border-height = 2px
 
   elStates(c-accent)
 
-.nav__link--active
+.ah-nav__link--active
   border-bottom-color c-accent
 
-.nav__link--special
+.ah-nav__link--special
   position relative
   overflow hidden
   max-width 230px
   white-space nowrap
   font-weight fw-semi-bold
 
-.nav__link--overflow
+.ah-nav__link--overflow
   &:after
     position absolute
     right 0
@@ -162,26 +162,26 @@ border-height = 2px
     background-image linear-gradient(to right, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 1))
     content ""
 
-.nav__item:hover
-  & > .nav__inner
+.ah-nav__item:hover
+  & > .ah-nav__inner
     visibility visible
     opacity 1
     transform translateY(0)
 
-.nav__inner
+.ah-nav__inner
   position fixed
   top header-height
   left 0
-  z-index 0
+  z-index 1
   visibility hidden
   width 100%
   border-top 1px solid #e5e5e5
   background-color c-white
   opacity 0
-  transition transform 0.4s cubic-bezier(0.55, 0.31, 0.15, 0.93), opacity 0.4s ease 0.2s
+  transition transform 0.2s cubic-bezier(0.55, 0.31, 0.15, 0.93), opacity 0.2s ease 0.2s
   transform translateY((-(header-height)))
 
-.nav__wrapper
+.ah-nav__wrapper
   margin 0 auto
   padding 40px 20px
   max-width 1220px
@@ -189,18 +189,18 @@ border-height = 2px
 /*
  * Themes submenu
  */
-.nav__themes
+.ah-nav__themes
   display flex
   flex-wrap wrap
   justify-content flex-start
   margin 0 -10px
 
-.nav__theme
+.ah-nav__theme
   flex-basis 25%
   margin-bottom 25px
   padding 0 10px
 
-.nav__see-all
+.ah-nav__see-all
   position relative
   display block
   margin-top 50px
@@ -222,7 +222,7 @@ border-height = 2px
   &:after
     right 0
 
-.nav__see-link
+.ah-nav__see-link
   color c-accent
   text-decoration none
   text-transform uppercase
@@ -239,13 +239,13 @@ border-height = 2px
 /*
  * Materials submenu
  */
-.nav__materials
+.ah-nav__materials
   display flex
   flex-wrap wrap
   justify-content flex-start
   margin 0 -50px
 
-.nav__material
+.ah-nav__material
   flex-basis 25%
   margin-bottom 25px
   padding 0 50px

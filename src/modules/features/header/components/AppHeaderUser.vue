@@ -1,8 +1,8 @@
 <template>
-  <div class="user">
-    <div class="user__label">Личный кабинет</div>
+  <div class="ah-user">
+    <div class="ah-user__label">Личный кабинет</div>
 
-    <div class="user__avatar">
+    <div class="ah-user__avatar">
       <app-header-icon class="accent-theme">
         <icon-user></icon-user>
       </app-header-icon>
@@ -20,14 +20,11 @@ export default {
     AppHeaderIcon,
     IconUser,
   },
-
-  /** Non-reactive properties */
-  methods: {},
 };
 </script>
 
 <style lang="stylus">
-.user
+.ah-user
   display flex
   align-items center
   font-weight fw-regular
@@ -35,18 +32,18 @@ export default {
   cursor pointer
 
   &:hover
-    .user__avatar
+    .ah-user__avatar
       border-color c-accent
       background-color #fce8e1
 
-.user__label
+.ah-user__label
   color c-black-soft
   text-transform uppercase
   font-weight fw-semi-bold
   font-size 14px
   line-height 1
 
-.user__avatar
+.ah-user__avatar
   box-sizing content-box
   margin-left 15px
   border 1px solid transparent

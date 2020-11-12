@@ -1,29 +1,28 @@
 <template>
-  <div class="header">
-
+  <div class="a-header">
     <!-- Left column -->
-    <div class="header__column header__column--left">
+    <div class="a-header__column a-header__column--left">
 
       <router-link
-        class="header__logo-holder"
+        class="a-header__logo-holder"
         to="/"
       >
         <img
-          class="header__logo"
+          class="a-header__logo"
           src="../assets/app-logo.svg"
           alt="Main logo"
         >
       </router-link>
 
       <nav
-        class="header__nav"
-        v-if="contentItems"
+        class="a-header__nav"
+        v-if="items"
       >
-        <app-header-nav :nav-items="contentItems"></app-header-nav>
+        <app-header-nav :nav-items="items"></app-header-nav>
       </nav>
 
       <div
-        class="header__preloader"
+        class="a-header__preloader"
         v-else
       >
         <content-loader
@@ -46,16 +45,16 @@
     </div>
 
     <!-- Right column -->
-    <div class="header__column header__column--right">
+    <div class="a-header__column a-header__column--right">
 
       <!-- Action buttons (random post, search) -->
-      <div class="header__actions">
+      <div class="a-header__actions">
 
-        <div class="header__search">
+        <div class="a-header__search">
           <app-header-search></app-header-search>
         </div>
 
-        <div class="header__random">
+        <div class="a-header__random">
           <app-header-icon
             tooltipContent="Случайный материал"
             :shouldShowTooltip="true"
@@ -70,7 +69,7 @@
       <router-link
         tag="div"
         to="/profile"
-        class="header__user"
+        class="a-header__user"
       >
         <app-header-user></app-header-user>
       </router-link>
@@ -80,9 +79,10 @@
 
 <script>
 import { ContentLoader } from 'vue-content-loader';
-import { getHeaderData, isUserAuthenticated } from '@/api';
+import { getHeaderData } from '@/api';
 import IconRandom from '@/icons/IconRandom.vue';
 import AppHeaderIcon from '../components/AppHeaderIcon.vue';
+import { getDataGeneric } from '@/mixins';
 const appHeaderUser = () => import('../components/AppHeaderUser.vue');
 const appHeaderNav = () => import('../components/AppHeaderNav.vue');
 const appHeaderSearch = () => import('../components/AppHeaderSearch.vue');
@@ -98,50 +98,10 @@ export default {
     appHeaderSearch,
   },
 
-  /** Local state */
-  data() {
-    return {
-      isLoading: false,
-      contentItems: null,
-      error: null,
-    };
-  },
+  mixins: [getDataGeneric(getHeaderData)],
 
-  /** Lifecycle events */
-  created() {
-    /** Delay to see placeholder */
-    setTimeout(() => {
-      this.getData();
-    }, 1000);
-  },
-
-  /** Non-reactive properties */
   methods: {
-    getData() {
-      this.switchLoadingFlagTo(true);
-
-      getHeaderData()
-        .then(this.handleSuccessResponse)
-        .catch(this.handleErrorResponse)
-        .finally(() => {
-          this.switchLoadingFlagTo(false);
-        });
-    },
-
-    handleSuccessResponse(data) {
-      console.log('log: handleSuccessResponse -> data', data);
-      this.contentItems = data;
-    },
-
-    handleErrorResponse(error) {
-      console.error(error);
-    },
-
-    switchLoadingFlagTo(flag) {
-      this.isLoading = flag;
-    },
-
-    onActionIconClick(event) {
+    onActionIconClick() {
       this.$router.push('random-article');
     },
   },
@@ -149,7 +109,7 @@ export default {
 </script>
 
 <style lang="stylus">
-.header
+.a-header
   display flex
   justify-content space-between
   align-items center
@@ -158,17 +118,17 @@ export default {
   background-color c-white
   box-shadow 0 2px 20px rgba(0, 0, 0, 0.1)
 
-.header__nav
+.a-header__nav
   margin-left 75px
   height 100%
 
-.header__preloader
+.a-header__preloader
   margin-left 90px
   min-width 700px
   width 100%
   height 100%
 
-.header__column
+.a-header__column
   display flex
   align-items center
   height 100%
@@ -176,26 +136,26 @@ export default {
 /*
  * Left column
  */
-.header__logo-holder
+.a-header__logo-holder
   display block
   flex-shrink 0
   width 180px
   height 45px
   cursor pointer
 
-.header__logo
+.a-header__logo
   width 100%
   height 100%
 
 /*
  * Right column
  */
-.header__actions
+.a-header__actions
   display flex
 
-.header__random
-  margin-left 10px
+.a-header__random
+  margin-left 7px
 
-.header__user
+.a-header__user
   margin-left 40px
 </style>

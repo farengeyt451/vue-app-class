@@ -1,10 +1,10 @@
 <template>
   <form
-    class="search-box"
+    class="ah-search-box"
     @submit.prevent.stop
   >
     <input
-      class="search-box__input"
+      class="ah-search-box__input"
       type="text"
       name="header-search"
       placeholder="Найти что-то интересное"
@@ -92,7 +92,7 @@ export default class AppHeaderSearchBox extends Vue {
 </script>
 
 <style lang="stylus">
-.search-box__input
+.ah-search-box__input
   padding 10px 60px 10px 20px
   width 100%
   outline none

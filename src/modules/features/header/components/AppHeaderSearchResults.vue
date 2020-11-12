@@ -115,7 +115,8 @@
 </template>
 
 <script>
-import ButtonBase from '@/modules/base/ButtonBase.vue';
+import { ButtonBase } from '@/modules/base';
+
 export default {
   /** Template dependencies*/
   components: { ButtonBase },

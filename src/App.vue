@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import AppHeader from '@/modules/features/header/pages/AppHeader.vue';
+import { AppHeader } from '@/modules/features/header';
 
 export default {
   /** Template dependencies*/
@@ -62,6 +62,7 @@ main
   flex-grow 1
   flex-shrink 0
   flex-basis auto
+  padding 40px 0
 
 .footer
   flex-shrink 0

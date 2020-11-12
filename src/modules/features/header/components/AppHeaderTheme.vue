@@ -1,21 +1,21 @@
 <template>
   <router-link
     v-if="theme"
-    class="theme"
+    class="ah-theme"
     :to="theme.url"
   >
-    <div class="theme__wrapper">
-      <div class="theme__holder">
+    <div class="ah-theme__wrapper">
+      <div class="ah-theme__holder">
         <img
-          class="theme__icon"
+          class="ah-theme__icon"
           :src="getAppHost + theme.icon.sizes.full"
           :alt="theme.title"
         >
       </div>
 
-      <div class="theme__info">
-        <h4 class="theme__name">{{ theme.title }}</h4>
-        <div class="theme__count">
+      <div class="ah-theme__info">
+        <h4 class="ah-theme__name">{{ theme.title }}</h4>
+        <div class="ah-theme__count">
           {{ theme.count }} {{ theme.count | pluralize(['публикация', 'публикации', 'публикаций']) }}
         </div>
       </div>
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="stylus">
-.theme
+.ah-theme
   display block
   text-decoration none
   font-family ff-main
@@ -51,36 +51,36 @@ export default {
   &:hover
     cursor pointer
 
-    .theme__name
+    .ah-theme__name
       color c-accent
 
-    .theme__holder
+    .ah-theme__holder
       transform scale(1.025)
 
   &:active
-    .theme__name
+    .ah-theme__name
       color darken(c-accent, 10%)
 
-.theme__wrapper
+.ah-theme__wrapper
   display flex
   align-items center
 
-.theme__holder
+.ah-theme__holder
   flex-shrink 0
   width 80px
   height 80px
   transition transform 0.2s ease
 
-.theme__icon
+.ah-theme__icon
   width 100%
   height 100%
   object-fit cover
   object-position center
 
-.theme__info
+.ah-theme__info
   margin-left 15px
 
-.theme__name
+.ah-theme__name
   color c-black-soft
   font-weight fw-semi-bold
   font-size 18px
@@ -90,7 +90,7 @@ export default {
   &:first-letter
     text-transform uppercase
 
-.theme__count
+.ah-theme__count
   display block
   margin-top 2px
   color c-grey-light

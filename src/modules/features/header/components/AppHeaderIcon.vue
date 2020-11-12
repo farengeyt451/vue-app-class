@@ -8,16 +8,16 @@
   >
 
     <div
-      class="icon"
+      class="ah-icon"
       @click="onIconClick"
     >
       <!-- Render wrapper with tooltip -->
       <template v-if="shouldShowTooltip">
         <div
-          class="icon__wrapper"
+          class="ah-icon__wrapper"
           v-tippy="tippyProps"
         >
-          <div class="icon__source">
+          <div class="ah-icon__source">
             <slot></slot>
           </div>
         </div>
@@ -25,8 +25,8 @@
 
       <!-- Render wrapper without tooltip -->
       <template v-else>
-        <div class="icon__wrapper">
-          <div class="icon__source">
+        <div class="ah-icon__wrapper">
+          <div class="ah-icon__source">
             <slot></slot>
           </div>
         </div>
@@ -86,7 +86,7 @@ export default {
 <style lang="stylus">
 @import "opacity-appear"
 
-.icon__wrapper
+.ah-icon__wrapper
   display flex
   justify-content center
   align-items center
@@ -117,7 +117,7 @@ export default {
     color c-accent
     pointer-events none
 
-.icon__source
+.ah-icon__source
   width 16px
   height 16px
   pointer-events none

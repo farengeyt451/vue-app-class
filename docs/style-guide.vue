@@ -17,14 +17,7 @@ export default {
   comments: false,
 
   /** Template dependencies */
-  components: {
-    AppHeaderNav,
-    AppHeaderIcon,
-    IconRandom,
-    IconSearch,
-    AppHeaderUser,
-    ContentLoader
-  },
+  components: {},
   directives: {},
   filters: {},
 
@@ -43,7 +36,7 @@ export default {
     return {
       isLoading: false,
       contentItems: null,
-      error: null
+      error: null,
     };
   },
   computed() {},
@@ -69,7 +62,7 @@ export default {
   /** Rendering */
   template: null,
   render() {},
-  renderError() {}
+  renderError() {},
 };
 </script>
 

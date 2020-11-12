@@ -14,12 +14,12 @@ export namespace AppHeader {
     };
   }
 
-  export interface Link {
+  interface Link {
     title: string;
     url: string;
   }
 
-  export interface Child {
+  interface Child {
     title: string;
     type: {
       id: number;
