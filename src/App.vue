@@ -20,6 +20,7 @@
 <script>
 import { isUserAuthenticated } from '@/api';
 import { AppHeader } from '@/modules/features/header';
+import { SET_USER_AUTHENTICATED_FLAG } from '@/store/modules/auth/types';
 
 export default {
   /** Template dependencies*/
@@ -46,7 +47,7 @@ export default {
   /** Non-reactive properties */
   methods: {
     checkForAuthStatus() {
-      this.$store.commit('setUserAuthenticatedFlagTo', isUserAuthenticated());
+      this.$store.commit(SET_USER_AUTHENTICATED_FLAG, isUserAuthenticated());
     },
   },
 };

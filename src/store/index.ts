@@ -1,9 +1,13 @@
 import Vue from 'vue';
 import Vuex, { Store } from 'vuex';
-import { AuthState, HeaderState } from './interfaces';
 
 /** Modules */
-import { headerModule, authModule } from './modules';
+import { headerModule } from './modules/header';
+import { authModule } from './modules/auth';
+
+/** Interfaces */
+import { AuthState } from './modules/auth/interfaces';
+import { HeaderState } from './modules/header/interfaces';
 
 Vue.use(Vuex);
 

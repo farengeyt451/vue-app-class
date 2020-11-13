@@ -67,6 +67,7 @@ import IconLoading from '@/icons/IconLoading.vue';
 import AppHeaderSearchBox from './AppHeaderSearchBox.vue';
 import AppHeaderIcon from './AppHeaderIcon.vue';
 import AppHeaderSearchResults from './AppHeaderSearchResults';
+import { SET_SEARCH_BOX_OPENED_FLAG } from '@/store/modules/header/types';
 
 export default {
   /** Template dependencies*/
@@ -105,7 +106,7 @@ export default {
     },
 
     commitOnFlagChange(flag) {
-      this.$store.commit('setIsSearchBoxOpenedFlagTo', flag);
+      this.$store.commit(SET_SEARCH_BOX_OPENED_FLAG, flag);
     },
   },
 };
