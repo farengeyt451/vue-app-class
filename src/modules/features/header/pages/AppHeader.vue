@@ -1,5 +1,6 @@
 <template>
   <div class="a-header">
+
     <!-- Left column -->
     <div class="a-header__column a-header__column--left">
 
@@ -82,10 +83,10 @@ import { ContentLoader } from 'vue-content-loader';
 import { getHeaderData } from '@/api';
 import IconRandom from '@/icons/IconRandom.vue';
 import AppHeaderIcon from '../components/AppHeaderIcon.vue';
-import { getDataGeneric } from '@/mixins';
 const appHeaderUser = () => import('../components/AppHeaderUser.vue');
 const appHeaderNav = () => import('../components/AppHeaderNav.vue');
 const appHeaderSearch = () => import('../components/AppHeaderSearch.vue');
+import { getDataGeneric } from '@/mixins';
 
 export default {
   /** Template dependencies */

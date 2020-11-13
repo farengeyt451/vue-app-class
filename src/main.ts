@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import Vuex from 'vuex';
 import App from './App.vue';
 import router from './router';
+import store from '@/store';
 
 /** Plugins */
 import PerfectScrollbar from 'vue2-perfect-scrollbar';
@@ -16,7 +16,6 @@ import '@/pipes/pluralize.pipe';
 import { globalGuard } from './guards/router.global-guard';
 
 /** Plugins registration */
-Vue.use(Vuex);
 Vue.use(PerfectScrollbar);
 
 /** Config */
@@ -24,28 +23,6 @@ Vue.config.productionTip = false;
 
 /** Guards init */
 router.beforeEach(globalGuard);
-
-const store = new Vuex.Store({
-  strict: process.env.NODE_ENV !== 'production',
-
-  state: {
-    count: 0,
-  },
-
-  mutations: {
-    increment(state) {
-      state.count++;
-    },
-  },
-
-  actions: {
-    incrementAsync({ commit }) {
-      setTimeout(() => {
-        commit('increment');
-      }, 1000);
-    },
-  },
-});
 
 const app = new Vue({
   router,

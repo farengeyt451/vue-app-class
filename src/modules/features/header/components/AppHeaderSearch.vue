@@ -6,6 +6,8 @@
       name="s-expand"
       mode="out-in"
       key="small"
+      @after-enter="commitOnFlagChange(true)"
+      @after-leave="commitOnFlagChange(false)"
     >
       <div
         class="ah-search__box"
@@ -100,6 +102,10 @@ export default {
 
     setResultsData(results) {
       this.results = results;
+    },
+
+    commitOnFlagChange(flag) {
+      this.$store.commit('setIsSearchBoxOpenedFlagTo', flag);
     },
   },
 };

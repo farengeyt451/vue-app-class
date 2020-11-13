@@ -1,19 +1,24 @@
 <template>
   <div id="app">
-    <header>
-      <app-header></app-header>
-    </header>
 
-    <main>
-      <router-view></router-view>
-    </main>
+    <perfect-scrollbar class="layout">
+      <header>
+        <app-header></app-header>
+      </header>
 
-    <footer>
-    </footer>
+      <main>
+        <router-view></router-view>
+      </main>
+
+      <footer>
+      </footer>
+    </perfect-scrollbar>
+
   </div>
 </template>
 
 <script>
+import { isUserAuthenticated } from '@/api';
 import { AppHeader } from '@/modules/features/header';
 
 export default {
@@ -30,6 +35,18 @@ export default {
       console.log('$route -> to', to);
       console.log(history);
       console.groupEnd();
+    },
+  },
+
+  /** Lifecycle events */
+  created() {
+    this.checkForAuthStatus();
+  },
+
+  /** Non-reactive properties */
+  methods: {
+    checkForAuthStatus() {
+      this.$store.commit('setUserAuthenticatedFlagTo', isUserAuthenticated());
     },
   },
 };
@@ -66,4 +83,7 @@ main
 
 .footer
   flex-shrink 0
+
+.ps.layout
+  max-height 100vh
 </style>

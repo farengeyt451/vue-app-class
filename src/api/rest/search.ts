@@ -1,6 +1,6 @@
 import { BaseCard } from '@/interfaces/base-card/base-card.interface';
 import { AxiosResponse, CancelToken } from 'axios';
-import makeRequest from '../helpers/makeRequest';
+import makeRequest from '../helpers/make-request';
 
 const rootRoute = 'search';
 

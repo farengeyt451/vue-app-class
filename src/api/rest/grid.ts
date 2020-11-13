@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import makeRequest from '../helpers/makeRequest';
+import makeRequest from '../helpers/make-request';
 import { AppHeader } from '@/interfaces/header/header.interface';
 import { BaseCard } from '@/interfaces/base-card/base-card.interface';
 

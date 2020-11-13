@@ -169,7 +169,7 @@ border-height = 2px
     transform translateY(0)
 
 .ah-nav__inner
-  position fixed
+  position absolute
   top header-height
   left 0
   z-index 1

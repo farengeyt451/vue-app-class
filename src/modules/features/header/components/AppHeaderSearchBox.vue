@@ -9,6 +9,7 @@
       name="header-search"
       placeholder="Найти что-то интересное"
       v-model="searchQuery"
+      ref="searchBox"
     >
   </form>
 </template>
@@ -44,6 +45,15 @@ export default class AppHeaderSearchBox extends Vue {
   @Watch('resetSearchQuery')
   private onResetSearchQuery(curValue: boolean) {
     if (!curValue) this.searchQuery = null;
+  }
+
+  @Watch('isSearchBoxOpened')
+  private onSearchBoxStateChange(isOpened: boolean) {
+    isOpened && (this.$refs.searchBox as HTMLElement).focus();
+  }
+
+  private get isSearchBoxOpened() {
+    return this.$store.state.header.isSearchBoxOpened;
   }
 
   private getData(query: string) {
