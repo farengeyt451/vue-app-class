@@ -4,6 +4,7 @@ import Vuex, { Store } from 'vuex';
 /** Modules */
 import { headerModule } from './modules/header';
 import { authModule } from './modules/auth';
+import { mainModule } from './modules/main';
 
 /** Interfaces */
 import { AuthState } from './modules/auth/interfaces';
@@ -17,6 +18,7 @@ const store: Store<{ header: HeaderState; auth: AuthState }> = new Vuex.Store({
   modules: {
     header: headerModule,
     auth: authModule,
+    main: mainModule,
   },
 });
 

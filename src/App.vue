@@ -10,8 +10,7 @@
         <router-view></router-view>
       </main>
 
-      <footer>
-      </footer>
+      <footer></footer>
     </perfect-scrollbar>
 
   </div>
@@ -86,5 +85,9 @@ main
   flex-shrink 0
 
 .ps.layout
+  display flex
+  flex-grow 1
+  flex-direction column
   max-height 100vh
+  height 100%
 </style>

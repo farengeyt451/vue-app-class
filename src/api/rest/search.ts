@@ -1,6 +1,6 @@
-import { BaseCard } from '@/interfaces/base-card/base-card.interface';
 import { AxiosResponse, CancelToken } from 'axios';
 import makeRequest from '../helpers/make-request';
+import { BaseCard } from '@/modules/features/grid/interfaces';
 
 const rootRoute = 'search';
 

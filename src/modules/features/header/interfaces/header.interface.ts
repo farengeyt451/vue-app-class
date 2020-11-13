@@ -1,17 +1,9 @@
+import { Icon } from '@/interfaces';
+
 export namespace AppHeader {
   interface Type {
     id: number;
     title: string;
-  }
-
-  interface Icon {
-    type: string;
-    description: string;
-    copyright?: any;
-    sizes: {
-      full: string;
-      thumb: string;
-    };
   }
 
   interface Link {

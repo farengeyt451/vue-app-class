@@ -1,4 +1,5 @@
 import { SET_SEARCH_BOX_OPENED_FLAG } from './types';
+import { HeaderState } from './interfaces';
 
 export const headerModule = {
   state: () => ({
@@ -6,7 +7,7 @@ export const headerModule = {
   }),
 
   mutations: {
-    [SET_SEARCH_BOX_OPENED_FLAG](state: any, flag: boolean) {
+    [SET_SEARCH_BOX_OPENED_FLAG](state: HeaderState, flag: boolean) {
       state.isSearchBoxOpened = flag;
     },
   },

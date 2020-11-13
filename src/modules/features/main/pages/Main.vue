@@ -1,15 +1,13 @@
 <template>
   <div class="main">
-    <div
-      class="main__grid"
-      v-if="items && items.length"
-    >
-      <grid :gridItems="items"></grid>
+    <div class="main__grid">
+      <grid></grid>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import Grid from '@/modules/features/grid';
 import { getCards } from '@/api';
 import { getDataGeneric } from '@/mixins';
@@ -17,13 +15,15 @@ import { getDataGeneric } from '@/mixins';
 export default {
   /** Template dependencies */
   components: { Grid },
-  mixins: [getDataGeneric(getCards)],
+
+  created() {
+    // Timeout to see placeholder
+    this.getGridData();
+  },
 
   /** Non-reactive properties */
   methods: {
-    handleSuccessResponse(response) {
-      this.items = response.data.slice(0, 20);
-    },
+    ...mapActions(['getGridData']),
   },
 };
 </script>

@@ -1,4 +1,4 @@
-import { Author, Image, Statistics, Theme } from '../common';
+import { Author, Image, Statistics, Theme } from '@/interfaces';
 
 export interface BaseCard {
   authors: Array<Author>;

@@ -1,5 +1,3 @@
-import { AxiosResponse } from 'axios';
-
 export const getDataGeneric = getDataFn => {
   return {
     /** Local state */

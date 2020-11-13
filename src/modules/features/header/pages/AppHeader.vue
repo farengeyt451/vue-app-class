@@ -79,9 +79,9 @@
 </template>
 
 <script>
-import { ContentLoader } from 'vue-content-loader';
 import { getHeaderData } from '@/api';
 import IconRandom from '@/icons/IconRandom.vue';
+import { ContentLoader } from 'vue-content-loader';
 import AppHeaderIcon from '../components/AppHeaderIcon.vue';
 const appHeaderUser = () => import('../components/AppHeaderUser.vue');
 const appHeaderNav = () => import('../components/AppHeaderNav.vue');
